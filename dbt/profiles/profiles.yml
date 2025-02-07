@@ -1,0 +1,12 @@
+postgres_profile:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: postgres  # Matches the service name in docker-compose
+      user: admin2
+      password: postgres
+      port: 5432
+      dbname: postgres_metabase1
+      schema: raw  # Target schema
+      threads: 4

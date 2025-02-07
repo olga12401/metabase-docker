@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Staging table for orders data."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: region
+        tests:
+          - not_null
+
+  - name: stg_returns
+    description: "Staging table for returns data."
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+  - name: stg_users
+    description: "Staging table for users data."
+    columns:
+      - name: region
+        tests:
+          - unique
+          - not_null
+
+  - name: final_orders_with_returns
+    description: "Final table combining orders with return statuses and regional manager information."
+    columns:
+      - name: order_id
+        tests:
+          - unique
