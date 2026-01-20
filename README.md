@@ -135,7 +135,9 @@ After setup:
 ### Analytics Tables Used in Dashboards
 
 Dashboards are built only on analytics tables.
+<img width="707" height="345" alt="Image" src="https://github.com/user-attachments/assets/5c6d30b8-d9b3-45a9-8e52-fc9db5a168e9" />
 
+<img width="716" height="556" alt="Image" src="https://github.com/user-attachments/assets/578369c7-613a-4761-84a1-8d999d07924a" />
 
 ## Stop / Restart Project
 
