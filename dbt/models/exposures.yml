@@ -1,0 +1,18 @@
+version: 2
+
+exposures:
+  - name: executive_dashboard
+    type: dashboard
+    maturity: high
+    url: http://localhost:3000
+    description: >
+      Executive dashboard in Metabase providing a high-level
+      overview of sales, profitability, and returns.
+    depends_on:
+      - ref('mart_orders_summary_by_region')
+      - ref('monthly_returns_trend')
+      - ref('product_performance')
+      - ref('top_customers')
+    owner:
+      name: Data Analyst
+      email: analyst@example.com

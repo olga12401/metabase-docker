@@ -2,7 +2,7 @@ WITH raw_users AS (
     SELECT
         region,
         manager
-    FROM {{ source('raw', 'managers') }}
+    FROM "postgres_metabase1"."raw"."managers"
 )
 SELECT *
 FROM raw_users

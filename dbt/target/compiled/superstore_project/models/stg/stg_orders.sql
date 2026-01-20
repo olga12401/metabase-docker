@@ -23,7 +23,7 @@ WITH raw_orders AS (
         discount,
         shipping_cost,
         product_base_margin
-    FROM {{ source('raw', 'orders') }}
+    FROM "postgres_metabase1"."raw"."orders"
 )
 SELECT *
 FROM raw_orders

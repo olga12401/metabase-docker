@@ -1,4 +1,9 @@
-WITH raw_orders AS (
+
+  create view "postgres_metabase1"."_staging"."stg_orders__dbt_tmp"
+    
+    
+  as (
+    WITH raw_orders AS (
     SELECT
         row_id,
         order_id,
@@ -23,7 +28,8 @@ WITH raw_orders AS (
         discount,
         shipping_cost,
         product_base_margin
-    FROM {{ source('raw', 'orders') }}
+    FROM "postgres_metabase1"."raw"."orders"
 )
 SELECT *
 FROM raw_orders
+  );

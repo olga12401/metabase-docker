@@ -9,11 +9,11 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: postgres_metabase1
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
       - ./postgres/csv:/var/lib/postgresql/csv
       - ./postgres/pg-init.d:/docker-entrypoint-initdb.d
     networks:
@@ -30,19 +30,42 @@ services:
       MB_DB_PORT: 5432
       MB_DB_USER: ${POSTGRES_USER}
       MB_DB_PASS: ${POSTGRES_PASSWORD}
-      MB_DB_DBNAME: postgres_metabase1
+      MB_DB_DBNAME: ${POSTGRES_DB}
       MB_EMAIL: ${METABASE_EMAIL}
       MB_PASSWORD: ${METABASE_PASSWORD}
+    volumes:
+      - metabase_data:/metabase-data
     depends_on:
       - postgres
     networks:
       - app_network
 
+  dbt:
+    build:
+      context: ./dbt
+      dockerfile: Dockerfile
+    container_name: dbt
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+    volumes:
+      - ./dbt:/usr/app
+    working_dir: /usr/app
+    environment:
+      DBT_PROFILES_DIR: /usr/app/profiles
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "8080:8080"
+    entrypoint: [ "tail", "-f", "/dev/null" ]
+
 volumes:
   postgres_data:
+  metabase_data:
 
 networks:
   app_network:
-
-
+    driver: bridge
 
